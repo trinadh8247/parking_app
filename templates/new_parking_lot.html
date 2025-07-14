@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}admin{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/lot_form.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h2>New Parking Lot</h2>
+        <form method="POST" action="{{url_for('new_parking_lot')}}">
+            <label>Prime Location Name:</label>
+            <input type="text" name="prime_location_name" required>
+
+            <label>Address:</label>
+            <textarea name="address" rows="3"></textarea>
+
+            <label>Pin code:</label>
+            <input type="text" name="pincode" required>
+
+            <label>Price (per hour):</label>
+            <input type="number" name="price" required>
+
+            <label>Maximum spots:</label>
+            <input type="number" name="maximum_number_of_spot" required>
+
+            <div class="form-buttons">
+                <button type="submit">Add</button>
+                <a href="{{url_for('admin_dashboard')}}" class="cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

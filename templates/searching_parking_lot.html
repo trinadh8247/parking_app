@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}Searching Parking Lot{% endblock %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/searching_parking_lot.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+{% endblock %}
+
+{% block content %}
+ 
+<header>
+    <div class="top-bar">
+        <div class="logo">
+            <a href="{{ url_for('user_dashboard') }}">PrAk <span class="highlight">KaRo</span></a>
+        </div>
+
+        <nav>
+            <a href="{{ url_for('user_dashboard') }}" 
+               class="{% if request.endpoint == 'user_dashboard' %}active{% endif %}">Home</a>
+            <a href="{{ url_for('searching_parking_lot') }}" 
+               class="{% if request.endpoint == 'searching_parking_lot' %}active{% endif %}">Book</a>
+            <a href="{{ url_for('user_summary', user_id=user.id) }}" 
+               class="{% if request.endpoint == 'user_summary' %}active{% endif %}">Summary</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+
+        <div class="right-section">
+            <div class="profile-container">
+                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" 
+                    alt="Profile" class="profile-icon" 
+                    data-bs-toggle="modal" data-bs-target="#profileModal">
+                <span class="welcome">Welcome {{ user.name }}</span>
+            </div>
+            <a href="{{ url_for('edit_profile', user_id=user.id) }}" class="edit-profile">Edit Profile</a>
+        </div>
+    </div>
+</header>
+
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="profileModalLabel">User Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Name:</strong> {{ session['name'] }}</p>
+        <p><strong>Email:</strong> {{ session['email'] }}</p>
+        <p><strong>Phone:</strong> {{ session['phone_number'] }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<main>
+<form method="POST" action="{{ url_for('searching_parking_lot') }}">
+    <select name="filter_type">
+        <option value="location" {% if filter_type == 'location' %}selected{% endif %}>
+            Location
+        </option>
+        <option value="pincode" {% if filter_type == 'pincode' %}selected{% endif %}>
+            Pincode</option>
+    </select>
+    <input type="text" name="search_query" value="{{ search_term or '' }}" required placeholder="Enter location or pincode">
+    <button type="submit">Search</button>
+</form>
+
+<h2>Parking Lots at {{ search_term }}</h2>
+
+<div class="lot-cards">
+    {% for lot in lots %}
+    <div class="lot-card">
+        <h3>Lot ID: {{ lot.id }}</h3>
+        <p><strong>Address:</strong> {{ lot.address }}</p>
+        <p><strong>Availability:</strong> 
+            {{ lot.spot 
+                | selectattr("status", "equalto", "A") 
+                | selectattr("is_active", "equalto", True) 
+                | list 
+                | length 
+            }}
+        </p>
+        <p><strong>Price:</strong> {{ lot.price }}</p>
+        {% set available_spots = lot.spot 
+    | selectattr("status", "equalto", "A") 
+    | selectattr("is_active", "equalto", True) 
+    | list 
+%}
+
+{% if available_spots|length > 0 %}
+    <a href="{{ url_for('book_spot', lot_id=lot.id) }}">
+        <button class="book-btn">Book</button>
+    </a>
+{% else %}
+    <p style="color: red; font-weight: bold;">All spots are occupied</p>
+{% endif %}
+
+        
+
+    </div>
+    {% else %}
+    <p>No lots found at this location/pincode.</p>
+    {% endfor %}
+</div>
+</main>
+<footer class="py-3 my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="{{url_for('user_dashboard')}}" class="nav-link px-2 text-muted">Home</a></li>
+      
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+    </ul>
+    <p class="text-center text-muted">© 2025 Park Karo, Inc</p>
+  </footer>
+{% endblock %}

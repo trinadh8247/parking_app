@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+<header>
+  <div class="top-bar">
+    <!-- Logo -->
+    <div class="logo">
+      <a href="{{ url_for('index') }}">PrAk <span class="highlight">KaRo</span></a>
+    </div>
+
+    <nav>
+      <a href="{{ url_for('index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}">Home</a>
+      <a href="{{ url_for('login') }}">Login</a>
+      <a href="{{ url_for('register') }}">Sign Up</a>
+    </nav>
+  </div>
+</header>
+
+
+
+
+<section class="feature">
+  <div class="text">
+    <h2>🚗 Never Get a Ticket Again.</h2>
+    <p>
+Use Park Karo and Park Smart.
+Tired of circling for parking or risking fines?<br>
+Park Karo helps you find, book, and manage your parking in seconds. <br>
+✔️ Real-time availability <br>
+✔️ Secure & verified spots <br>
+✔️ Transparent pricing <br>
+✔️ Easy check-in and checkout <br>
+
+Book your next spot stress-free.
+Let Park Karo do the parking hustle for you</p>
+  </div>
+  <img src="/static/images/login.jpg" alt="Feature 1">
+</section>
+
+<section class="feature reverse">
+  <img src="/static/images/index.jpg" alt="Feature 2">
+  <div class="text">
+    <h2>Let there be ease!</h2>
+    <p>Get peace of mind with real-time updates and secure bookings in just a few clicks.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="#">FAQs</a>
+    <a href="#">About</a>
+  </div>
+  <p>&copy; 2025 Park Karo, Inc</p>
+</footer>
+{% endblock %}

@@ -1,0 +1,69 @@
+.flash-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.flash {
+    position: relative;
+    padding: 12px 40px 12px 20px;
+    margin-bottom: 15px;
+    min-width: 250px;
+    border-radius: 6px;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff; 
+    color: #2c3e50; 
+    border-left: 6px solid #007bff;
+}
+
+.flash-success {
+    border-left-color: #28a745;
+}
+
+.flash-error {
+    border-left-color: #dc3545;
+}
+
+.flash-warning {
+    border-left-color: #ffc107;
+}
+
+.flash-info {
+    border-left-color: #17a2b8;
+}
+
+body.layout-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+main {
+    flex: 1;
+    padding-bottom: 30px;}
+
+footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    margin-top: auto;
+    text-align: center;
+    border-top: 1px solid #dee2e6;
+}
+
+.flash-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+    cursor: pointer;
+}

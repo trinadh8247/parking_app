@@ -1,0 +1,164 @@
+/* Top Bar */
+.top-bar {
+    background-color: #ffffff;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e0e0e0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Profile */
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.welcome {
+    color: #34495e;
+    font-weight: 600;
+}
+
+/* Navigation */
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #0077cc;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #e6f2ff;
+}
+
+/* Highlight Active Page */
+nav a.active {
+    background-color: #0077cc;
+    color: #ffffff;
+}
+
+/* Edit Profile Button */
+.edit-profile {
+    color: #f39c12;
+    text-decoration: none;
+    font-weight: bold;
+}
+/* Logo */
+.logo a {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0077cc;
+    text-decoration: none;
+}
+.logo a .highlight {
+    color: #f39c12;
+}
+
+/* Top Bar */
+.top-bar {
+    background-color: #ffffff;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e0e0e0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Right Side (Profile + Edit) */
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Profile */
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.welcome {
+    color: #34495e;
+    font-weight: 600;
+}
+
+/* Navigation */
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #0077cc;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #e6f2ff;
+}
+
+/* Highlight Active Page */
+nav a.active {
+    background-color: #0077cc;
+    color: #ffffff;
+}
+
+/* Edit Profile Button */
+.edit-profile {
+    color: #f39c12;
+    text-decoration: none;
+    font-weight: bold;
+}
+/*upto here*/
+
+
+/* Popup background overlay */
+.release-popup {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+}
+
+.release-popup:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Popup box */
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+}

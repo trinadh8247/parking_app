@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="login-background">
+  <div class="login-card">
+    <h2 class="logo">PaRk <span class="highlight">KaRo</span></h2>
+    <form method="POST">
+      <input name="email" placeholder="Email" required><br>
+      <input name="password" type="password" placeholder="Password" required><br>
+      <button type="submit">Login</button>
+    </form>
+    <div class="register-link">
+      <a href="{{ url_for('register') }}">Don't have an account? Register</a>
+    </div>
+  </div>
+</div>
+
+<footer class="py-3 my-4">
+  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+    <li class="nav-item"><a href="{{url_for('index')}}" class="nav-link px-2 text-muted">Home</a></li>
+    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+  </ul>
+  <p class="text-center text-muted">© 2025 Park Karo, Inc</p>
+</footer>
+{% endblock %}

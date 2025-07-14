@@ -1,0 +1,176 @@
+/* Reset & Base */
+/* Reset & Base */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+    color: #2c3e50;
+}
+
+h2 {
+    margin: 20px 0;
+    text-align: center;
+    color: #2c3e50;
+}
+
+/* Top Bar */
+.top-bar {
+    background-color: #ffffff;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e0e0e0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.welcome {
+    font-weight: 600;
+    color: #0077cc;
+}
+
+/* Navigation */
+nav a {
+    margin: 0 10px;
+    padding: 8px 14px;
+    text-decoration: none;
+    color: #0077cc;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+    font-weight: 500;
+}
+
+nav a:hover {
+    background-color: #e8f4ff;
+}
+
+nav a.active {
+    background-color: #0077cc;
+    color: white;
+}
+
+.edit-profile {
+    color: #f39c12;
+    text-decoration: none;
+    font-weight: bold;
+}
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.app-logo {
+    height: 40px;
+    width: auto;
+}
+
+/* Flex restructure for the top bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 15px 30px;
+    background-color: #ffffff;
+    border-bottom: 2px solid #e0e0e0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Center nav links */
+nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Right section with profile + edit */
+.right-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+/* Logo Text Styling */
+.logo-text {
+    font-size: 26px;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #0077cc;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.logo-text .highlight {
+    color: #f39c12;
+}
+
+nav a.active {
+    background-color: #0077cc;
+    color: white;
+}
+
+.users-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.users-container h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.user-table thead {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.user-table th, .user-table td {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 15px;
+}
+
+.user-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.user-table tbody tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s;
+}
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+}

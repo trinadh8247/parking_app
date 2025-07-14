@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}admin{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin_summary.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<header>
+    <div class="top-bar">
+    <div class="logo-container">
+    <span class="logo-text">PrAk <span class="highlight">KaRo</span></span>
+</div>
+
+
+    <nav>
+        <nav>
+    <a href="{{ url_for('admin_dashboard') }}" class="{% if request.endpoint == 'admin_dashboard' %}active{% endif %}">Home</a>
+    <a href="{{ url_for('users') }}" class="{% if request.endpoint == 'users' %}active{% endif %}">Users</a>
+    <a href="{{ url_for('admin_summary') }}" class="{% if request.endpoint == 'admin_summary' %}active{% endif %}">Summary</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</nav>
+
+    </nav>
+
+    <div class="right-controls">
+        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" 
+             alt="Profile" class="profile-icon" 
+             data-bs-toggle="modal" data-bs-target="#profileModal">
+        <a href="{{url_for('edit_profile',user_id=1)}}" class="edit-profile">Edit Profile</a>
+    </div>
+</div>
+
+</header>
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="profileModalLabel">User Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Name:</strong> {{ admin.name }}</p>
+        <p><strong>Email:</strong> {{ admin.email }}</p>
+        <p><strong>Phone:</strong> {{ admin.phone_number }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <main>
+
+
+    <div class="dashboard-container">
+        <h1>Admin Summary</h1>
+
+        <div class="stats-cards">
+            <div class="card">
+                
+                <h2>{{stats['total_lots'][0]+stats['total_lots'][1]}}</h2>
+                <p>Total Parking Lots</p>
+            </div>
+            <div class="card">
+                <h2> {{ stats['total_lots'][0] }}</h2>
+                <p>Active_lots</p>
+            </div>
+            <div class="card">
+                <h2>{{ stats['total_lots'][1] }}</h2>
+                <p>Inactive-lots</p>
+            </div>
+            <div class="card">
+                <h2>{{ stats['total_spots'][0] }}</h2>
+                <p>Total Spots</p>
+            </div>
+            
+            <div class="card">
+                <h2>{{ stats['total_reservations'][0] }}</h2>
+                <p>Total Reservations</p>
+            </div>
+            <div class="card">
+                <h2>{{ stats['total_reservations'][1] }}</h2>
+                <p>Active Reservations</p>
+            </div>
+            <div class="card">
+                <h2>{{ stats['total_users'][0] }}</h2>
+                <p>Registered Users</p>
+            </div>
+            <div class="card">
+                <h2>₹{{ stats['total_revenue'][0] }}</h2>
+                <p>Total Revenue</p>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="py-3 my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="{{url_for('admin_dashboard')}}" class="nav-link px-2 text-muted">Home</a></li>
+      
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+    </ul>
+    <p class="text-center text-muted">© 2025 Park Karo, Inc</p>
+  </footer>
+{% endblock %}

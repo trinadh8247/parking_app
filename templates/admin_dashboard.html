@@ -1,0 +1,152 @@
+
+{% extends 'base.html' %}
+{% block title %}admin{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<header>
+    <div class="top-bar">
+        <div class="logo-container">
+            <span class="logo-text">PaRk <span class="highlight">KaRo</span></span>
+        </div>
+
+
+        <nav>
+            <nav>
+                <a href="{{ url_for('admin_dashboard') }}"
+                    class="{% if request.endpoint == 'admin_dashboard' %}active{% endif %}">Home</a>
+                <a href="{{ url_for('users') }}" class="{% if request.endpoint == 'users' %}active{% endif %}">Users</a>
+                <a href="{{ url_for('admin_summary') }}"
+                    class="{% if request.endpoint == 'admin_summary' %}active{% endif %}">Summary</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </nav>
+
+        </nav>
+
+        <div class="right-controls">
+            <label for="profile-toggle">
+    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" class="profile-icon">
+</label>
+
+            <a href="{{url_for('edit_profile',user_id=1)}}" class="edit-profile">Edit Profile</a>
+        </div>
+    </div>
+
+</header>
+<input type="checkbox" id="profile-toggle" class="modal-toggle" hidden>
+<div class="modal">
+    <label for="profile-toggle" class="modal-overlay"></label>
+    <div class="modal-content">
+        <h3>User Profile</h3>
+        <p><strong>Name:</strong> {{ admin.name }}</p>
+        <p><strong>Email:</strong> {{ admin.email }}</p>
+        <p><strong>Phone:</strong> {{ admin.phone_number }}</p>
+
+        <div class="buttons">
+            <label for="profile-toggle" class="btn cancel">Close</label>
+        </div>
+    </div>
+</div>
+
+<main>
+    <h2>Parking Lots</h2>
+
+    <div class="parking-lots">
+        {% for lot in lots %}
+        {% if lot.status == 'active' %}
+        <div class="lot">
+            <div class="lot-header">
+                <span>Lot at {{ lot.prime_location_name }}</span>
+                <a href="{{url_for('edit_parking_lot',lot_id=lot.id)}}">Edit</a> |
+                <label for="modal-{{ lot.id }}" class="delete-link">Delete</label>
+            </div>
+
+            <div class="status">address: {{ lot.address }}</div>
+            <div class="status">price: <strong>{{ lot.price }}</strong></div>
+            <div class="status">Occupied: {{ lot.spot | selectattr("status", "equalto", "O") | list | length }}/{{ lot.maximum_number_of_spot }}</div>
+
+            <div class="slots">
+                {% for spot in lot.spot %}
+                {% if spot.is_active %}
+                <a href="#popup-{{ spot.id }}">
+                    <div class="slot {% if spot.status == 'O' %}occupied{% else %}available{% endif %}">
+                        {{ spot.status }}
+                    </div>
+                </a>
+
+                <div id="popup-{{ spot.id }}" class="popup">
+                    <div class="popup-content">
+                        <h3>View/Delete Parking Spot</h3>
+                        <p><strong>ID:</strong> {{ spot.id }}</p>
+
+                        {% if spot.status == 'O' %}
+                        <p><strong>Status:</strong>
+                            <a href="{{url_for('occupied_spot_details',spot_id=spot.id)}}" style="color: orange; font-weight: bold;">
+                                {{ spot.status }}
+                            </a>
+                        </p>
+                        <p style="color: red;"> Spot is occupied.</p>
+                        {% else %}
+                        <p><strong>Status:</strong> {{ spot.status }}</p>
+                        {% endif %}
+
+                        <div class="buttons">
+                            <a href="{{ url_for('admin_dashboard') }}" class="close-btn">Close</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    {% for lot in lots %}
+    {% if lot.status == 'active' %}
+    <input type="checkbox" id="modal-{{ lot.id }}" class="modal-toggle" hidden>
+    <div class="modal">
+        <label for="modal-{{ lot.id }}" class="modal-overlay"></label>
+        <div class="modal-content">
+            <h3>Confirm Deletion</h3>
+            <p><strong>Location:</strong> {{ lot.prime_location_name }}</p>
+            <p><strong>Address:</strong> {{ lot.address }}</p>
+            <p><strong>Price:</strong> ₹{{ lot.price }}</p>
+            <p><strong>Occupied:</strong> {{ lot.spot | selectattr("status", "equalto", "O") | list | length }}/{{ lot.maximum_number_of_spot }}</p>
+
+            <form method="POST" action="{{ url_for('deactivate_lot', lot_id=lot.id) }}">
+                <button type="submit" class="btn danger">Delete</button>
+                <label for="modal-{{ lot.id }}" class="btn cancel">Cancel</label>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <div class="text-center">
+        <a href="{{url_for('new_parking_lot')}}">
+        <button class="add-lot">+ Add Lot</button>
+    </a>
+    <a href="{{url_for('inactive_lots')}}" >
+        <button class="inactive-lots" >Inactive Lots</button>
+    </a>
+    </div>
+</main>
+
+<footer class="py-3 my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="{{url_for('admin_dashboard')}}" class="nav-link px-2 text-muted">Home</a></li>
+
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+    </ul>
+    <p class="text-center text-muted">© 2025 Park Karo, Inc</p>
+</footer>
+{% endblock %}
+
+

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Spot{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/book_spot.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="popup-container">
+    <div class="popup-header">Book the parking spot</div>
+    <form method="POST" action="{{ url_for('book_spot',lot_id=lot_id) }}">
+        <label>Spot ID:</label>
+        <input type="text" name="spot_id" value="{{ spot_id }}" readonly>
+
+        <label>Lot ID:</label>
+        <input type="text" name="lot_id" value="{{ lot_id }}" readonly>
+
+        <label>User ID:</label>
+        <input type="text" name="user_id" value="{{ user_id }}" readonly>
+
+
+        <label>Vehicle Number:</label>
+        <input type="text" name="vehicle_number" placeholder="Enter vehicle number" required>
+
+        <div class="form-buttons">
+            <button type="submit" class="reserve-btn">Reserve</button>
+            <a href="{{ url_for('searching_parking_lot') }}">
+                <button type="button" class="cancel-btn">Cancel</button>
+            </a>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}occupied_spot_details{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/occupied_spot_details.css') }}">
+{% endblock %}
+{% block content %}
+<div class="occupied-spot-popup">
+  <div class="occupied-spot-content">
+    <h2>Occupied Parking Spot Details</h2>
+    
+    <label>ID:</label>
+    <input type="text" value="{{ spot.id }}" readonly>
+
+    <label>Customer ID:</label>
+    <input type="text" value="{{ reservation.user.id if reservation.user else 'N/A' }}" readonly>
+
+    <label>Vehicle Number:</label>
+    <input type="text" value="{{ reservation.vehicle_number }}" readonly>
+
+    <label>Date/Time of Parking:</label>
+    <input type="text" value="{{ reservation.start_time.strftime('%Y-%m-%d %H:%M') }}" readonly>
+
+    <label>Est. Parking Cost:</label>
+    <input type="text" value="₹{{ estimated_cost }}" readonly>
+
+    <button class="close-btn" onclick="window.history.back()">Close</button>
+  </div>
+</div>
+
+
+{% endblock %}
