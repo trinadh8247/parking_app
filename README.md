@@ -7,7 +7,7 @@
 ## 📁 Project Structure
 
 ```
-parking_app_23f3003992/
+parking_app/
 │
 ├── app.py
 ├── requirements.txt
@@ -54,7 +54,7 @@ parking_app_23f3003992/
 1. **Clone the repo**
 
 ```bash
-git clone https://github.com/yourusername/park-karo.git
+git clone https://github.com/trinadh8247/parking_app.git
 cd park-karo
 ```
 
@@ -91,7 +91,7 @@ The app will start on `http://127.0.0.1:5000`.
 
 ## 📞 Contact
 
-For issues or questions, contact [your-trinadh2711@gmail.com].
+For issues or questions, contact [your-trinadh2026@gmail.com].
 
 ---
 
